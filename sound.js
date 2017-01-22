@@ -1,5 +1,5 @@
 function preload() {
-  mySound = loadSound('./assets/shootingstar.mp3');
+  mySound = loadSound('https://mp3d.jamendo.com/download/track/1314413/mp32/');
 }
 
 function setup() {
