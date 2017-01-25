@@ -1,12 +1,26 @@
 'use strict';
 
+// npm modules
 const express = require('express');
 const debug = require('debug')('visualizer:server');
 const fs = require('fs');
+const path = require('path');
 
-// Module Constants
+// module constants
 const PORT = process.env.PORT || 3000;
 const app = express();
+
+app.use(express.static(__dirname + 'public'));
+
+// Route to get music file
+app.get('/music', function(req, res){
+  // set file path to query
+  var fileId = req.query.id;
+  var file = `${__dirname}/music/${fileId}`;
+  res.set({'Content-Type': 'audio/mpeg'});
+  var readStream = fs.createReadStream(file);
+  readStream.pipe(res);
+});
 
 const server = module.exports = app.listen(PORT, function() {
   debug('server started');
