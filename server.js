@@ -4,13 +4,14 @@
 const express = require('express');
 const debug = require('debug')('visualizer:server');
 const fs = require('fs');
-const path = require('path');
+//const path = require('path');
 
 // module constants
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use(express.static(__dirname + 'public'));
+// Use express middleware to serve music files directly
+app.use(express.static(`${__dirname}/app`));
 
 // Route to get music file
 app.get('/music', function(req, res){
